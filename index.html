@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海草智测 - 商业计划书</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* 1. THE SETUP & BASE STYLES */
+        * { box-sizing: border-box; }
+        body {
+            background-color: #1a202c;
+            display: grid;
+            gap: 40px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            padding: 40px 0;
+            place-items: center;
+        }
+
+        /* 核心配色与尺寸 */
+        .slide-container {
+            align-items: center;
+            background-color: #040D1A;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 50px 60px;
+            position: relative;
+            width: 1280px;
+        }
+
+        /* 载入在线背景图：第一页 (为了在预览中显示) */
+        /* 下载本地后，请替换为: url('Gemini_Generated_Image_fw4gxffw4gxffw4g.jpg') */
+        #slide1 {
+            background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 载入在线背景图：后续页面 (为了在预览中显示) */
+        /* 下载本地后，请替换为: url('Gemini_Generated_Image_y4p2lxy4p2lxy4p2.jpg') */
+        .slide-container:not(#slide1) {
+            background-image: url('https://images.unsplash.com/photo-1551244072-5d12893278ab?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 背景遮罩层：确保文本绝对可读性 */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(4, 13, 26, 0.9) 0%, rgba(10, 30, 63, 0.8) 100%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .slide-container > * { position: relative; z-index: 1; width: 100%; }
+
+        /* 2. CONSISTENT TYPOGRAPHY */
+        h1, h2, h3, h4, .slide-title { font-family: 'Noto Serif SC', serif; color: #FFFFFF; margin: 0; font-weight: 700; }
+        p, li, .subtitle, th, td { font-family: 'Noto Sans SC', sans-serif; color: #E2E8F0; line-height: 1.6; margin: 0; }
+        .tech-font { font-family: 'Orbitron', sans-serif; letter-spacing: 2px; }
+
+        .highlight-green { color: #00FFA3; text-shadow: 0 0 12px rgba(0, 255, 163, 0.4); }
+        .highlight-cyan { color: #00D2FF; text-shadow: 0 0 12px rgba(0, 210, 255, 0.4); }
+
+        .slide-title {
+            font-size: 36px;
+            margin-bottom: 25px;
+            text-align: left;
+            border-left: 6px solid #00FFA3;
+            padding-left: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        /* 金属质感玻璃面板 */
+        .glass-panel {
+            background: rgba(4, 13, 26, 0.65);
+            border: 1px solid rgba(0, 255, 163, 0.25);
+            border-top: 1px solid rgba(0, 210, 255, 0.4);
+            border-left: 1px solid rgba(0, 210, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            padding: 25px;
+        }
+
+        /* 3. LAYOUTS */
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .three-column { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .four-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        
+        .bullet-list ul { list-style: none; margin: 0; padding: 0; }
+        .bullet-list li {
+            position: relative; padding-left: 40px; margin-bottom: 15px;
+            background: rgba(255,255,255,0.03); padding: 15px 15px 15px 45px;
+            border-radius: 8px; border-left: 3px solid rgba(0, 210, 255, 0.3);
+            font-size: 16px;
+        }
+        .bullet-list li i { position: absolute; left: 15px; top: 18px; color: #00FFA3; font-size: 18px; }
+        .bullet-list li strong { color: #00D2FF; font-weight: 700; display: block; margin-bottom: 5px; font-size: 18px; }
+
+        .timeline { display: flex; justify-content: space-between; align-items: center; position: relative; margin-top: 40px; padding: 0 20px; }
+        .timeline::before { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(0, 210, 255, 0.3); z-index: 0; }
+        .timeline-step { position: relative; z-index: 1; text-align: center; background: #040D1A; padding: 10px; border-radius: 50%; border: 2px solid #00FFA3; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #00FFA3;}
+        .timeline-content { position: absolute; top: 50px; left: 50%; transform: translateX(-50%); width: 200px; text-align: center; }
+
+    </style>
+</head>
+<body>
+
+<!-- 封面 -->
+<div class="slide-container" id="slide1">
+    <div class="glass-panel" style="text-align: center; padding: 60px; max-width: 900px; margin: auto;">
+        <h1 style="font-size: 64px; letter-spacing: 6px; margin-bottom: 10px;">
+            <span class="highlight-cyan">海草智测</span> <span style="font-size: 40px; color: #E2E8F0;">/ Seagrass Watch</span>
+        </h1>
+        <p style="font-size: 24px; color: #00FFA3; margin-bottom: 40px; font-weight: 700;">空海协同的蓝碳生态智护与交易平台</p>
+        
+        <div style="height: 1px; width: 80%; background: linear-gradient(90deg, transparent, rgba(0, 210, 255, 0.5), transparent); margin: 0 auto 40px;"></div>
+        
+        <div style="text-align: left; display: inline-block; font-size: 18px; line-height: 2;">
+            <p><strong style="color: #00D2FF;">参赛学校：</strong> [你的大学名称]</p>
+            <p><strong style="color: #00D2FF;">项目组别：</strong> [例如：高教主赛道-初创组]</p>
+            <p><strong style="color: #00D2FF;">团队成员：</strong> [姓名1 (负责人)], [姓名2], [姓名3]</p>
+            <p><strong style="color: #00D2FF;">指导教师：</strong> [姓名1 (职称)], [姓名2 (职称)]</p>
+        </div>
+    </div>
+</div>
+
+<!-- 一、执行摘要 -->
+<div class="slide-container" id="slide2">
+    <h2 class="slide-title">一、执行摘要 (Executive Summary)</h2>
+    <div class="content-area four-grid">
+        <div class="glass-panel bullet-list">
+            <ul>
+                <li><i class="fa-solid fa-crosshairs"></i><strong>项目痛点</strong>海草床退化严重，传统人工潜水观测效率极低，蓝碳储量难以精准量化，导致海洋环保缺乏数据支撑。</li>
+                <li><i class="fa-solid fa-lightbulb"></i><strong>解决方案</strong>集成“水下无人机(AUV) + 沉积物传感器 + AI大模型”，打造半自动化智能监测与蓝碳交易SaaS平台。</li>
+            </ul>
+        </div>
+        <div class="glass-panel bullet-list">
+            <ul>
+                <li><i class="fa-solid fa-gem"></i><strong>核心优势</strong>全天候立体感知；独创AI海草健康指数评估；基于区块链防双重计算的碳信用核发追踪系统。</li>
+                <li><i class="fa-solid fa-chart-line"></i><strong>市场潜力</strong>瞄准东南亚庞大的“蓝碳”潜力，迎合全球SDGs目标，满足政府治理及碳汇市场的刚性需求。</li>
+            </ul>
+        </div>
+        <div class="glass-panel bullet-list" style="grid-column: 1 / span 2; display: flex; gap: 20px;">
+            <ul style="flex: 1;">
+                <li><i class="fa-solid fa-money-bill-wave"></i><strong>商业模式</strong>B/G端软件买断 + C端VIP增值(无人机控制/高阶AI) + 碳交易平台抽佣。</li>
+            </ul>
+            <ul style="flex: 1;">
+                <li><i class="fa-solid fa-flag-checkered"></i><strong>愿景与融资</strong>[本轮计划融资XX万元，出让XX%股份]；致力于成为东南亚领先的蓝碳数字基础设施服务商。</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 二、项目背景与痛点 -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">二、项目背景与痛点分析</h2>
+    <div class="content-area two-column">
+        <div class="glass-panel">
+            <h3 class="highlight-cyan" style="margin-bottom: 20px;"><i class="fa-solid fa-earth-asia"></i> 行业背景与社会需求</h3>
+            <p style="margin-bottom: 15px;">东南亚海草床是全球最有效的天然碳汇（蓝碳）系统之一，不仅固碳能力强，还能稳定海岸线、保护生物多样性（SDG 14）。</p>
+            <p>然而，由于海岸开发、污染和变暖，生态正在急剧恶化。全球气候变暖催生了对“基于自然的解决方案（NbS）”的巨大政策与市场需求（SDG 13）。</p>
+        </div>
+        <div class="glass-panel bullet-list">
+            <h3 class="highlight-green" style="margin-bottom: 20px;"><i class="fa-solid fa-triangle-exclamation"></i> 现有解决方案的三大痛点</h3>
+            <ul>
+                <li><i class="fa-solid fa-user-slash"></i><strong>传统潜水观测效率极低</strong>人力成本高昂，受限于水文条件，且观测面积碎片化。</li>
+                <li><i class="fa-solid fa-chart-pie"></i><strong>蓝碳量化难度极大</strong>缺乏动态、连续的数据支撑，现有模型无法准确核算海底沉积物中的碳储量。</li>
+                <li><i class="fa-solid fa-link-slash"></i><strong>保护与交易脱节</strong>生态修复盲目，且缺乏数字化、防篡改的碳信用签发体系。</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 三、解决方案与核心技术 (硬件+AI) -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">三、解决方案与核心技术 (架构篇)</h2>
+    <div class="content-area">
+        <div class="three-column" style="margin-bottom: 20px;">
+            <div class="glass-panel" style="text-align: center;">
+                <i class="fa-solid fa-microchip" style="font-size: 40px; color: #00D2FF; margin-bottom: 15px;"></i>
+                <h3 style="font-size: 20px;">智能传感器矩阵</h3>
+                <p style="font-size: 14px; text-align: left; margin-top: 10px;">深埋于沉积物中，实时感知温度、水质、光照与根系状态。解决水下复杂环境的数据持续获取难题。</p>
+            </div>
+            <div class="glass-panel" style="text-align: center;">
+                <i class="fa-solid fa-drone" style="font-size: 40px; color: #00FFA3; margin-bottom: 15px;"></i>
+                <h3 style="font-size: 20px;">半自主水下无人机</h3>
+                <p style="font-size: 14px; text-align: left; margin-top: 10px;">搭载太阳能系统与抗腐蚀外壳，执行水下摄像扫描，实时绘制大范围海草分布图。</p>
+            </div>
+            <div class="glass-panel" style="text-align: center;">
+                <i class="fa-solid fa-brain" style="font-size: 40px; color: #F59E0B; margin-bottom: 15px;"></i>
+                <h3 style="font-size: 20px;">AI核心大模型</h3>
+                <p style="font-size: 14px; text-align: left; margin-top: 10px;">通过“人机协作”利用现有AI工具训练专有模型，进行图像识别、健康度打分与蓝碳估算。</p>
+            </div>
+        </div>
+        <div class="glass-panel" style="padding: 15px 25px; border-left: 5px solid #00FFA3;">
+            <p><strong>技术壁垒：</strong> 突破了水下无人机的稳态控制难题，并成功实现深水沉积物传感器的稳定信号回传与长效续航。</p>
+        </div>
+    </div>
+</div>
+
+<!-- 三、解决方案 (软件功能) -->
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">三、产品功能展示 (软件SaaS)</h2>
+    <div class="content-area four-grid">
+        <div class="glass-panel">
+            <h3 class="highlight-cyan"><i class="fa-solid fa-map"></i> 可视化热力分布图</h3>
+            <p style="margin-top: 10px; font-size: 15px;">
+                蓝色(无海草) -> 绿色(少量) -> 橙色(较多) -> 红色(极密)。支持点击区块查看无人机回传实景与实时测算数据。
+            </p>
+        </div>
+        <div class="glass-panel">
+            <h3 class="highlight-cyan"><i class="fa-solid fa-heart-pulse"></i> 健康指数与生长评级</h3>
+            <p style="margin-top: 10px; font-size: 15px;">
+                AI模型综合色彩、长度、形态及环境数据，自动生成健康评级报告及固碳能力评估。
+            </p>
+        </div>
+        <div class="glass-panel">
+            <h3 class="highlight-cyan"><i class="fa-solid fa-bell"></i> 实时预警监控系统</h3>
+            <p style="margin-top: 10px; font-size: 15px;">
+                基于底层逻辑生成“安全指数”。高分绿底，低分红底并自动列举碳释放与退化风险，附带智能维护建议。
+            </p>
+        </div>
+        <div class="glass-panel">
+            <h3 class="highlight-green"><i class="fa-solid fa-link"></i> 区块链蓝碳交易平台</h3>
+            <p style="margin-top: 10px; font-size: 15px;">
+                根据面积密度估算碳信用。将生成、核查、挂牌、交易、注销全生命周期记录上链，彻底杜绝重复计算。
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- 四、市场分析 -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">四、市场分析 (STP与竞争优势)</h2>
+    <div class="content-area two-column">
+        <div class="glass-panel bullet-list">
+            <h3 style="margin-bottom: 20px;">目标市场定位 (STP)</h3>
+            <ul>
+                <li><strong>Targeting (目标客户)</strong><br>主打东南亚地区的海洋科研机构、环保NGO、沿海政府管理部门，以及具有ESG需求的购碳企业。</li>
+                <li><strong>Positioning (市场定位)</strong><br>东南亚首个集“底层数据采集+AI评估+区块链交易”于一体的蓝碳生态闭环服务商。</li>
+            </ul>
+            <p style="margin-top: 20px; font-size: 14px; color: #A0AEC0;">*注：随着全球碳交易市场突破万亿美元，海洋蓝碳作为高价值碳汇，市场规模(TAM)正在呈几何级数增长。</p>
+        </div>
+        <div class="glass-panel">
+            <h3 class="highlight-green" style="margin-bottom: 20px;">竞争优势 (USP)</h3>
+            <table style="width: 100%; text-align: left; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid rgba(0,255,163,0.3);">
+                    <th style="padding: 10px; color: #00D2FF;">维度</th>
+                    <th style="padding: 10px;">传统方法 (遥感/潜水)</th>
+                    <th style="padding: 10px; color: #00FFA3;">海草智测</th>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 10px;">精度与深度</td>
+                    <td style="padding: 10px; font-size: 14px;">浅海受限，精度低</td>
+                    <td style="padding: 10px; font-size: 14px; color: #00FFA3;">深层沉积物传感，微观级别</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 10px;">成本与效率</td>
+                    <td style="padding: 10px; font-size: 14px;">人力极高，周期长</td>
+                    <td style="padding: 10px; font-size: 14px; color: #00FFA3;">半自动化运行，秒级出图</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;">商业闭环</td>
+                    <td style="padding: 10px; font-size: 14px;">仅能出具科研报告</td>
+                    <td style="padding: 10px; font-size: 14px; color: #00FFA3;">直通碳交易信用变现</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 五、商业模式 -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">五、商业模式 (盈利结构)</h2>
+    <div class="content-area">
+        <div class="three-column">
+            <div class="glass-panel" style="border-top: 4px solid #3B82F6;">
+                <h3 style="text-align: center; margin-bottom: 15px;">B/G端：软件买断与硬件支持</h3>
+                <p style="font-size: 15px;">向科研机构、沿海社区和政府部门以固定价格出售软件基础版及硬件套装。<br><br><strong>价值：</strong> 获取早期现金流，快速铺设底层传感器网络。</p>
+            </div>
+            <div class="glass-panel" style="border-top: 4px solid #F59E0B;">
+                <h3 style="text-align: center; margin-bottom: 15px;">C/B端：VIP 增值订阅服务</h3>
+                <p style="font-size: 15px;">普通用户或进阶科研者购买VIP特权，可解锁：<br>1. 水下无人机的远程操作权限；<br>2. 更高阶的AI模型预测与历史双轴曲线深度分析。</p>
+            </div>
+            <div class="glass-panel" style="border-top: 4px solid #10B981;">
+                <h3 style="text-align: center; margin-bottom: 15px;">平台端：碳交易抽佣 (核心爆发点)</h3>
+                <p style="font-size: 15px;">依托平台的区块链碳信用体系，撮合蓝碳指标的上市与交易，从中按比例提取交易手续费与服务佣金，打造长期复利。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 六与七、营销与团队 -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">六 & 七、营销战略与团队介绍</h2>
+    <div class="content-area two-column">
+        <div class="glass-panel bullet-list">
+            <h3 class="highlight-cyan" style="margin-bottom: 20px;">合作伙伴战略 (破冰渠道)</h3>
+            <p style="margin-bottom: 15px;">采用“借船出海”策略，主动向东南亚知名NGO及科研机构提交联合项目建议书，获取场地、数据与权威背书：</p>
+            <ul>
+                <li><strong>MareCet：</strong>专注儒艮与海草保护协同</li>
+                <li><strong>Reef Check Malaysia：</strong>提供海图绘制与监测经验</li>
+                <li><strong>Marine Research Foundation：</strong>权威生态理论支持</li>
+            </ul>
+        </div>
+        <div class="glass-panel">
+            <h3 class="highlight-green" style="margin-bottom: 20px;">核心团队力量</h3>
+            <!-- 提示用户在此处填写实际团队信息 -->
+            <div style="display: flex; gap: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+                <div style="width: 60px; height: 60px; background: #00D2FF; border-radius: 50%;"></div>
+                <div><h4 style="color: #FFF;">[姓名] - 创始人/CEO</h4><p style="font-size: 14px;">[专业背景]，负责项目整体统筹与商业架构</p></div>
+            </div>
+            <div style="display: flex; gap: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+                <div style="width: 60px; height: 60px; background: #00FFA3; border-radius: 50%;"></div>
+                <div><h4 style="color: #FFF;">[姓名] - CTO 技术总监</h4><p style="font-size: 14px;">[专业背景]，主攻AI模型训练与无人机控制</p></div>
+            </div>
+            <p style="font-size: 14px; color: #A0AEC0;">*顾问团队：[填写您的指导教师及行业专家名称]</p>
+        </div>
+    </div>
+</div>
+
+<!-- 八、运营现状与未来路线图 -->
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">八、运营进展与未来路线图</h2>
+    <div class="content-area">
+        <div class="glass-panel" style="width: 100%; margin-bottom: 30px;">
+            <h3 class="highlight-cyan">当前运营进展</h3>
+            <p><strong>技术进度：</strong> 已完成[软件原型设计/初期AI模型框架]，正在进行[XX]测试。<br>
+               <strong>取得成果：</strong> [列举已获竞赛奖项、专利、意向合作书等]。</p>
+        </div>
+        
+        <div class="glass-panel" style="width: 100%;">
+            <h3 class="highlight-green">Milestones 里程碑规划</h3>
+            <div class="timeline">
+                <div class="timeline-step">1</div>
+                <div class="timeline-content"><h4 style="color: #FFF;">阶段一</h4><p style="font-size: 14px; color: #A0AEC0;">原型软硬件联调与近海封闭水域测试</p></div>
+                
+                <div class="timeline-step" style="left: 33%;">2</div>
+                <div class="timeline-content" style="left: 33%;"><h4 style="color: #FFF;">阶段二</h4><p style="font-size: 14px; color: #A0AEC0;">联合东南亚NGO开展首个试点生态区监测</p></div>
+                
+                <div class="timeline-step" style="left: 66%;">3</div>
+                <div class="timeline-content" style="left: 66%;"><h4 style="color: #FFF;">阶段三</h4><p style="font-size: 14px; color: #A0AEC0;">软件商业化发售与VIP服务体系上线</p></div>
+                
+                <div class="timeline-step" style="left: 100%;">4</div>
+                <div class="timeline-content" style="left: 100%;"><h4 style="color: #FFF;">阶段四</h4><p style="font-size: 14px; color: #A0AEC0;">打通区块链接口，全面启动碳信用交易</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 九、财务分析 -->
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">九、融资需求与财务分析</h2>
+    <div class="content-area two-column">
+        <div class="glass-panel">
+            <h3 class="highlight-cyan" style="margin-bottom: 20px;">融资计划</h3>
+            <p style="font-size: 40px; color: #FFF; font-family: 'Orbitron';">[XX] <span style="font-size: 20px; color: #E2E8F0;">万元 RMB</span></p>
+            <p style="margin-bottom: 20px;">拟出让股权：[XX]%</p>
+            <div style="margin-top: 15px;">
+                <h4 style="color: #00FFA3; margin-bottom: 10px;">资金用途：</h4>
+                <p>■ 40% 硬件设备迭代与AI模型采购/训练<br>
+                   ■ 30% 市场开拓与东南亚试点部署<br>
+                   ■ 20% 团队扩充与运营资金<br>
+                   ■ 10% 专利申请与合规建设</p>
+            </div>
+        </div>
+        <div class="glass-panel" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <h3 style="margin-bottom: 20px;">3-5年财务预测模型</h3>
+            <div style="width: 100%; height: 200px; border-bottom: 2px solid #333; border-left: 2px solid #333; position: relative; padding: 10px;">
+                <!-- 示意图替代 -->
+                <div style="position: absolute; bottom: 0; left: 10%; width: 20%; height: 20%; background: #3B82F6;"></div>
+                <div style="position: absolute; bottom: 0; left: 40%; width: 20%; height: 50%; background: #10B981;"></div>
+                <div style="position: absolute; bottom: 0; left: 70%; width: 20%; height: 90%; background: #00D2FF;"></div>
+                <svg style="position: absolute; top:0; left:0; width:100%; height:100%;" preserveAspectRatio="none">
+                    <polyline points="0,180 150,150 300,80 450,20" fill="none" stroke="#F59E0B" stroke-width="4"/>
+                </svg>
+            </div>
+            <p style="font-size: 14px; color: #A0AEC0; margin-top: 15px;">* 预计在第[X]年实现盈亏平衡，主要利润增长点将由前期的硬件销售转向后期的碳交易佣金。</p>
+        </div>
+    </div>
+</div>
+
+<!-- 十、风险管理 -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">十、风险分析与应对策略</h2>
+    <div class="content-area">
+        <div class="three-column">
+            <div class="glass-panel">
+                <h3 style="color: #EF4444;"><i class="fa-solid fa-triangle-exclamation"></i> 技术风险</h3>
+                <p style="margin-top: 15px; font-size: 14px;"><strong>描述：</strong> 水下无人机抗流与稳定控制难度大；沉积物传感器数据传输受阻。<br><br><strong>应对：</strong> 针对特定海草环境定制防腐蚀保护壳及特殊排水推进系统；根据海底深度科学测算天线及传感器尺寸。</p>
+            </div>
+            <div class="glass-panel">
+                <h3 style="color: #F59E0B;"><i class="fa-solid fa-database"></i> 数据与AI风险</h3>
+                <p style="margin-top: 15px; font-size: 14px;"><strong>描述：</strong> 早期缺乏足够的底库数据用于训练专属AI模型。<br><br><strong>应对：</strong> 采用“人机协作 (Human-in-the-loop)”机制，灵活利用现有成熟大模型的图像分割能力进行人工微调矫正。</p>
+            </div>
+            <div class="glass-panel">
+                <h3 style="color: #00D2FF;"><i class="fa-solid fa-scale-balanced"></i> 政策与市场风险</h3>
+                <p style="margin-top: 15px; font-size: 14px;"><strong>描述：</strong> 跨国蓝碳交易标准不一，推广遇阻。<br><br><strong>应对：</strong> 严格遵循联合国SDGs框架设计；依托NGO (如MareCet) 建立政府互信基础，获取合规认证。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 十一、社会价值与结语 -->
+<div class="slide-container" id="slide12">
+    <h2 class="slide-title" style="text-align: center; border: none; padding: 0;">十一、社会影响与结语</h2>
+    <div class="content-area">
+        <div class="glass-panel" style="width: 80%; margin: 0 auto; text-align: center;">
+            <div style="display: flex; justify-content: center; gap: 30px; margin-bottom: 30px;">
+                <div style="background: #E5243B; color: white; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 20px;">SDG 13 <br><span style="font-size: 14px; font-weight: normal;">气候行动</span></div>
+                <div style="background: #0A97D9; color: white; padding: 15px; border-radius: 8px; font-weight: bold; font-size: 20px;">SDG 14 <br><span style="font-size: 14px; font-weight: normal;">水下生物</span></div>
+            </div>
+            
+            <h2 style="font-size: 40px; margin-bottom: 20px; letter-spacing: 4px;">守护蔚蓝底色，共铸<span class="highlight-green">数字蓝碳</span></h2>
+            <div style="height: 1px; background: rgba(255,255,255,0.2); width: 80%; margin: 0 auto 30px;"></div>
+            <p style="font-size: 18px; color: #E2E8F0; text-align: left; padding: 0 40px;">
+                <strong>生态价值：</strong> 为大规模海草床修复提供科学的数据“底座”，逆转海洋退化危机。<br><br>
+                <strong>经济与社会价值：</strong> 激活东南亚闲置的天然蓝碳资产，为沿海社区创造新的“碳汇”经济收入，推动传统海洋产业的数字化、绿色化转型升级。
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- 尾页 -->
+<div class="slide-container" id="slide13">
+    <div class="content-area" style="text-align: center; justify-content: center;">
+        <h2 style="font-size: 80px; margin-bottom: 20px; letter-spacing: 5px;">
+            <span class="highlight-cyan">感谢</span><span class="highlight-green">聆听</span>
+        </h2>
+        <p style="font-size: 26px; color: #E2E8F0;">海草智测 - 期待您的指导与加入</p>
+        <div style="margin-top: 60px;">
+            <p class="tech-font" style="color: rgba(255,255,255,0.3); font-size: 16px;">
+                SEAGRASS STUDIO / SEAGRASS WATCH
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
